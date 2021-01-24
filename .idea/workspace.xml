@@ -20,19 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667000bc-6c47-48a5-a6c8-ae3dfdcfb2a6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/basket.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/basket.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/item.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/item.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/items.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/items.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/mainLayout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/mainLayout.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/search.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/search.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +36,7 @@
         <option value="TypeScript File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -58,6 +50,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -113,7 +106,7 @@
       <workItem from="1611226627085" duration="18906000" />
       <workItem from="1611338931551" duration="8784000" />
       <workItem from="1611438415061" duration="2663000" />
-      <workItem from="1611488418449" duration="214000" />
+      <workItem from="1611488418449" duration="2071000" />
     </task>
     <servers />
   </component>
@@ -137,26 +130,26 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1611056486380" />
-    <state width="1344" height="200" key="GridCell.Tab.0.bottom" timestamp="1611441113771">
+    <state width="1344" height="199" key="GridCell.Tab.0.bottom" timestamp="1611489522079">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="200" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611441113771" />
-    <state width="1344" height="200" key="GridCell.Tab.0.center" timestamp="1611441113771">
+    <state width="1344" height="199" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611489522079" />
+    <state width="1344" height="199" key="GridCell.Tab.0.center" timestamp="1611489522078">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="200" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611441113771" />
-    <state width="1344" height="200" key="GridCell.Tab.0.left" timestamp="1611441113771">
+    <state width="1344" height="199" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611489522078" />
+    <state width="1344" height="199" key="GridCell.Tab.0.left" timestamp="1611489522078">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611232413692" />
-    <state width="1344" height="200" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611441113771" />
-    <state width="1344" height="200" key="GridCell.Tab.0.right" timestamp="1611441113771">
+    <state width="1344" height="199" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611489522078" />
+    <state width="1344" height="199" key="GridCell.Tab.0.right" timestamp="1611489522078">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="200" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611441113771" />
+    <state width="1344" height="199" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611489522078" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1611305317882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

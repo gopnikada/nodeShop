@@ -159,6 +159,7 @@ app.get('/', (req,res)=>{
 })
 app.get('/items', (req,res)=>{
     res.render('items', {layout:'mainLayout', title:"Items", items: itemsList})
+    //console.log(a)
 })
 app.post('/search', (req,res)=>{
     let regex = new RegExp(`${req.body.searchField}`, 'i')
@@ -176,19 +177,21 @@ app.get('/items/:id',(req, res)=>{
 })
 app.get('/basket', (req,res)=>{
     res.render('basket',
-        res.render('basket',
             {
                 layout:'mainLayout',
                 title: 'Basket',
-                orders: orders
-            }))
+                orders: orders,
+                count: 5
+            })
 })
 app.post('/basket', (req,res)=>{
+    orders.push(new Object(itemsList[req.body.getIdInput-1]))
     res.render('basket',
         {
             layout:'mainLayout',
             title: 'Basket',
-            orders: orders
+            orders: orders,
+            count: 5
         })
 })
 app.listen(3000)

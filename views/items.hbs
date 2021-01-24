@@ -9,7 +9,8 @@
                         <a href={{link}}><img src={{image}} alt=""></a>
                         <form action="/basket" method="post">
                             {{#if this.count}}
-                           <input class="btn btn-success m-2" type="submit" value="Купить">
+                                <input type="hidden" name="getIdInput" value={{id}}>
+                                <input class="btn btn-success m-2" type="submit" value="Купить">
                             {{else}}
                                 <button class="btn btn-secondary m-2" disabled>Товар закончился</button>
                             {{/if}}
