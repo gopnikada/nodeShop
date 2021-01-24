@@ -2,16 +2,16 @@
     <div class="raw">
         <div class="col-md-12">
             {{cat}}
-            <form method="get" action="/items">
+            <form method="get" action="/items" class="d-flex flex-row">
                 <select class="form-select" aria-label="Default select example" name="optVal">
-                    <option selected>All items</option>
+                    <option>All items</option>
                     <option value="phone">Phones</option>
                     <option value="notebook">Notebooks</option>
                     <option value="pc">Computers</option>
                     <option value="mp3">MP3</option>
                     <option value="cpu">CPUs</option>
                 </select>
-                <input type="submit">
+                <input type="submit" class="btn btn-success" value="Sort">
             </form>
 
             <ul class="d-flex flex-wrap flex-row bg-light" style="list-style-type: none">

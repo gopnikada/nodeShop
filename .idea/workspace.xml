@@ -20,20 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667000bc-6c47-48a5-a6c8-ae3dfdcfb2a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/img/acer.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/athlon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/ipod.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/lenovo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/macpro.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/pc.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/pentium.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/walkman.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/xeon.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/items.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/items.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/search.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/search.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +106,7 @@
       <workItem from="1611338931551" duration="8784000" />
       <workItem from="1611438415061" duration="2663000" />
       <workItem from="1611488418449" duration="3991000" />
-      <workItem from="1611492536843" duration="7041000" />
+      <workItem from="1611492536843" duration="7883000" />
     </task>
     <servers />
   </component>
@@ -141,26 +130,26 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1611056486380" />
-    <state width="1344" height="199" key="GridCell.Tab.0.bottom" timestamp="1611510347943">
+    <state width="1344" height="199" key="GridCell.Tab.0.bottom" timestamp="1611512403685">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611510347943" />
-    <state width="1344" height="199" key="GridCell.Tab.0.center" timestamp="1611510347943">
+    <state width="1344" height="199" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611512403685" />
+    <state width="1344" height="199" key="GridCell.Tab.0.center" timestamp="1611512403685">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611510347943" />
-    <state width="1344" height="199" key="GridCell.Tab.0.left" timestamp="1611510347942">
+    <state width="1344" height="199" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611512403685" />
+    <state width="1344" height="199" key="GridCell.Tab.0.left" timestamp="1611512403684">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611232413692" />
-    <state width="1344" height="199" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611510347942" />
-    <state width="1344" height="199" key="GridCell.Tab.0.right" timestamp="1611510347943">
+    <state width="1344" height="199" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611512403684" />
+    <state width="1344" height="199" key="GridCell.Tab.0.right" timestamp="1611512403685">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611510347943" />
+    <state width="1344" height="199" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611512403685" />
     <state width="1344" height="233" key="GridCell.Tab.1.bottom" timestamp="1611502374030">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

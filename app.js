@@ -232,7 +232,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
-        cat:'pc',
+        cat:'mp3',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -288,26 +288,27 @@ const itemsList = [
 
 let orders = []
 
+let itemsToShow = []
 
 app.use(express.static(path.join(__dirname, 'src')))
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({extended: false}))
 
 app.get('/', (req,res)=>{
     res.render('index', {layout:'mainLayout'})
 })
 app.get('/items', (req,res)=>{
+    itemsToShow.length==0
+        ?itemsToShow=itemsList
+        :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)
     res.render('items',
         {
             layout:'mainLayout',
             title:"Items",
-            items: itemsList,
-            cat: req.query.optVal
+            items: itemsToShow,
+
         })
-    console.log(req.headers)
-    console.log(req.params)
-    console.log(req.query)
 })
 app.post('/search', (req,res)=>{
     let regex = new RegExp(`${req.body.searchField}`, 'i')
@@ -337,7 +338,6 @@ app.post('/basket', (req,res)=>{
     if(req.body.orderToDelete!=null){
         orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1)
         orders = orders.filter(value => Object.keys(value).length !== 0)
-
     }
     console.log(orders)
     res.render('basket',
