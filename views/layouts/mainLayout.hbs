@@ -6,14 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/script.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script src="js/lodash.js"></script>
 </head>
 <body>
 <header>
-    <p>header!</p>
+    <div class="container bg-info text-center fixed-top p-2">
+        <div class="header row">
+            <div class="col-md-4">
+                <a href="/">Home</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/items">Items</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/basket">Basket</a>
+            </div>
+        </div>
+    </div>
 </header>
 
 {{{body}}}
 
-<footer><p>footer!</p></footer>
+<footer>
+    <div class="container">
+        <div class="footer row text-center bg-dark">
+            <div class="col-md-4">
+                <a href="/contacts">Contacts</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/input">Home</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/about">About</a>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -1,38 +1,7 @@
-.header{
-    background: greenyellow;
-    color: red;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 3vh;
-    font-family: sans-serif;
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
+.item{
+    margin: 0.5vh;
 }
-.header a{
-    text-decoration: none;
-}
-.header a:hover{
-    color: blueviolet;
-}
-.footer{
-    background: aqua;
-    color: red;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 3vh;
-    font-family: sans-serif;
-}
-.footer a:hover{
-    color: blueviolet;
-}
-li{
-    font-size: 60px;
-}
-header{
-    position: -webkit-sticky;
-    position: sticky;
-    top: 8px;
+.item img{
+    width: 50vh;
+    height: auto;
 }

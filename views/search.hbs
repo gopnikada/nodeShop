@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="raw">
+        <div class="col-md-12">
+            <ul class="d-flex flex-wrap flex-row bg-light">
+                {{#each foundItems}}
+                    <li class="item">
+                        <p>NAME: {{name}}</p>
+                        <img src={{image}} alt="">
+                        <form action="/" method="post">
+                            {{#if this.count}}
+                                <input type="submit" value="Купить">
+                            {{else}}
+                                <button disabled>Товар закончился</button>
+                            {{/if}}
+                        </form>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,24 +1,22 @@
-<ul>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-    <li>1</li>
-</ul>
+<div class="container pt-5">
+    <div class="raw">
+        <div class="col-md-12">
+            <ul class="d-flex flex-wrap flex-row bg-light" style="list-style-type: none">
+                {{#each items}}
+                    <li class="item">
+                        <a href={{link}}>{{name}}</a>
+                        <br>
+                        <a href={{link}}><img src={{image}} alt=""></a>
+                        <form action="/basket" method="post">
+                            {{#if this.count}}
+                           <input class="btn btn-success m-2" type="submit" value="Купить">
+                            {{else}}
+                                <button class="btn btn-secondary m-2" disabled>Товар закончился</button>
+                            {{/if}}
+                        </form>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

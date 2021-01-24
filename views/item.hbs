@@ -1,0 +1,16 @@
+<div class="container mt-5 text-center">
+    <div class="raw">
+        <div class="col-md-12">
+            <p>Name: {{item.name}}</p>
+            <img src={{item.image}} alt="">
+            <p class="w-50">{{item.descr.review}}</p>
+            <form action="/basket" method="post">
+                {{#if item.count}}
+                    <input class="btn btn-success m-5" type="submit" value="Купить">
+                {{else}}
+                    <button disabled>Товар закончился</button>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+</div>
