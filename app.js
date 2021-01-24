@@ -11,6 +11,7 @@ app.engine('hbs', exhbs({
     defaultLayout: 'mainLayout',
     layoutsDir: __dirname+'/views/layouts'
 }))
+app.use(express.urlencoded({ extended: true }))
 
 const itemsList = [
     {
@@ -21,6 +22,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -35,6 +37,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -49,6 +52,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -63,6 +67,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -77,6 +82,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -91,6 +97,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -105,6 +112,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -119,6 +127,7 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -133,6 +142,142 @@ const itemsList = [
         link: function (){
             return '/items/' + this.id
         },
+        cat:'phone',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:10,
+        name:'Lenovo A1',
+        count:0,
+        image:'/img/lenovo.png',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'notebook',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:11,
+        name:'Acer B5',
+        count:5,
+        image:'/img/acer.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'notebook',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:12,
+        name:'PowerPc XL',
+        count:10,
+        image:'/img/pc.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'pc',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:13,
+        name:'MacPro',
+        count:15,
+        image:'/img/macpro.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'pc',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:14,
+        name:'Sony walkman b12',
+        count:20,
+        image:'/img/walkman.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'mp3',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:15,
+        name:'Apple iPod3',
+        count:17,
+        image:'/img/ipod.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'pc',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:16,
+        name:'Intel Pentium1',
+        count:15,
+        image:'/img/pentium.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'cpu',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:17,
+        name:'AMD Athlon',
+        count:0,
+        image:'/img/athlon.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'cpu',
+        descr: {
+            country: "China",
+            display: "1920x1080 AMOLED",
+            review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
+        }
+    },
+    {
+        id:18,
+        name:'Intel xeon',
+        count:17,
+        image:'/img/xeon.jpg',
+        link: function (){
+            return '/items/' + this.id
+        },
+        cat:'cpu',
         descr: {
             country: "China",
             display: "1920x1080 AMOLED",
@@ -153,8 +298,16 @@ app.get('/', (req,res)=>{
     res.render('index', {layout:'mainLayout'})
 })
 app.get('/items', (req,res)=>{
-    res.render('items', {layout:'mainLayout', title:"Items", items: itemsList})
-    //console.log(a)
+    res.render('items',
+        {
+            layout:'mainLayout',
+            title:"Items",
+            items: itemsList,
+            cat: req.query.optVal
+        })
+    console.log(req.headers)
+    console.log(req.params)
+    console.log(req.query)
 })
 app.post('/search', (req,res)=>{
     let regex = new RegExp(`${req.body.searchField}`, 'i')
@@ -176,14 +329,14 @@ app.get('/basket', (req,res)=>{
                 layout:'mainLayout',
                 title: 'Basket',
                 orders: orders,
-                count: 5
+                count: 5,
             })
 })
 app.post('/basket', (req,res)=>{
     orders.push(new Object(itemsList[req.body.getIdInput-1]))
     if(req.body.orderToDelete!=null){
-        orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1);
-        orders = orders.filter(value => Object.keys(value).length !== 0);
+        orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1)
+        orders = orders.filter(value => Object.keys(value).length !== 0)
 
     }
     console.log(orders)

@@ -1,16 +1,18 @@
-<div class="container">
+<div class="container pt-5">
     <div class="raw">
         <div class="col-md-12">
-            <ul class="d-flex flex-wrap flex-row bg-light">
+            <ul class="d-flex flex-wrap flex-row bg-light" style="list-style-type: none">
                 {{#each foundItems}}
                     <li class="item">
-                        <p>NAME: {{name}}</p>
-                        <img src={{image}} alt="">
-                        <form action="/" method="post">
+                        <a href={{link}}>{{name}}</a>
+                        <br>
+                        <a href={{link}}><img src={{image}} alt=""></a>
+                        <form action="/basket" method="post">
                             {{#if this.count}}
-                                <input type="submit" value="Купить">
+                                <input type="hidden" name="getIdInput" value={{id}}>
+                                <input class="btn btn-success m-2" type="submit" value="Купить">
                             {{else}}
-                                <button disabled>Товар закончился</button>
+                                <button class="btn btn-secondary m-2" disabled>Товар закончился</button>
                             {{/if}}
                         </form>
                     </li>
