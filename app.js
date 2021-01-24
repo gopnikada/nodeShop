@@ -141,13 +141,8 @@ const itemsList = [
     },
 ]
 
-let orders = [
+let orders = []
 
-]
-
-const order = function (){
-    console.log(12)
-}
 
 app.use(express.static(path.join(__dirname, 'src')))
 
@@ -186,6 +181,12 @@ app.get('/basket', (req,res)=>{
 })
 app.post('/basket', (req,res)=>{
     orders.push(new Object(itemsList[req.body.getIdInput-1]))
+    if(req.body.orderToDelete!=null){
+        orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1);
+        orders = orders.filter(value => Object.keys(value).length !== 0);
+
+    }
+    console.log(orders)
     res.render('basket',
         {
             layout:'mainLayout',
@@ -193,5 +194,6 @@ app.post('/basket', (req,res)=>{
             orders: orders,
             count: 5
         })
+
 })
 app.listen(3000)

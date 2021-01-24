@@ -1,14 +1,31 @@
 <div class="container mt-5">
+    {{#if orders}}
+<ul>
+    {{#each orders}}
     <div class="row">
-        <div class="col-md-12 d-flex flex-row">
-            <ul>
-                {{#each orders}}
-                    <li class="d-flex flex-row justify-content-between">
+        <div class="col-md-12">
+
+                <li class="d-flex flex-row justify-content-between p-2">
+                    <div>
                         <p>{{name}}</p>
-                        <img style="width: 10vh" src={{image}} alt="">
-                    </li>
-                {{/each}}
-            </ul>
+                        <form action="/basket" method="post">
+                            <input type="hidden" name="orderToDelete" value={{id}}>
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </div>
+                    <img style="height: 30vh; width: auto" src={{image}} alt="">
+
+                </li>
+
         </div>
     </div>
+        <hr>
+    {{/each}}
+</ul>
+    <form action="/buy" class="text-center">
+        <input type="submit" value="Купить" class="btn btn-success m-3 p-3">
+    </form>
+    {{else}}
+        <p>no items yet ordered</p>
+    {{/if}}
 </div>
