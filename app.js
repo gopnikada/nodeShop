@@ -3,6 +3,8 @@ const exhbs = require('express-handlebars')
 const path = require('path')
 const bodyParser = require('body-parser')
 const app = express()
+const pg = require('pg')
+const { Pool } = require('pg')
 
 app.set('view engine', 'hbs')
 
@@ -13,7 +15,15 @@ app.engine('hbs', exhbs({
 }))
 app.use(express.urlencoded({ extended: true }))
 
-const itemsList = [
+const pool = new Pool({
+    user: 'postgres',
+    database: 'shop',
+    host: 'localhost',
+    password: 'postgres',
+    port: 5432,
+})
+
+const  itemsList = [
     {
         id:1,
         name:'iPhone',
@@ -286,6 +296,7 @@ const itemsList = [
     },
 ]
 
+
 let orders = []
 
 let itemsToShow = []
@@ -298,18 +309,37 @@ app.use(express.static(path.join(__dirname, 'src')))
 app.get('/', (req,res)=>{
     res.render('index', {layout:'mainLayout'})
 })
-app.get('/items', (req,res)=>{
-    itemsToShow.length==0
-        ?itemsToShow=itemsList
-        :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)
-    res.render('items',
-        {
-            layout:'mainLayout',
-            title:"Items",
-            items: itemsToShow,
-
+// app.get('/items', (req,res)=>{
+//     itemsToShow.length==0
+//         ?itemsToShow=itemsList
+//         :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)
+//     res.render('items',
+//         {
+//             layout:'mainLayout',
+//             title:"Items",
+//             items: itemsToShow,
+//
+//         })
+// })
+app.get('/items', async (req,res)=>{
+    pool.on('error', (err)=>{
+        console.error(err)
+        process.exit(-1)
+    })
+    pool.connect((err, client, done)=>{
+        if ( err ) throw err
+        client.query('SELECT * FROM items', (err, result)=>{
+            done()
+            if (err){
+                console.log(err.stack)
+            }else{
+                console.log('connected')
+                res.render('items', {layout: 'mainLayout', items: result.rows})
+            }
         })
+    })
 })
+
 app.post('/search', (req,res)=>{
     let regex = new RegExp(`${req.body.searchField}`, 'i')
     res.render('search', {
