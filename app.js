@@ -330,9 +330,9 @@ app.get('/items', async (req,res)=>{
         let rq
         console.log(req.query.optVal)
         if(req.query.optVal == undefined ||req.query.optVal == 'Allitems' ){
-            rq = `SELECT * FROM items`
+            rq = `SELECT * FROM items ORDER BY id ASC`
         }else{
-            rq = `SELECT * FROM items WHERE cat='${req.query.optVal}'`
+            rq = `SELECT * FROM items WHERE cat='${req.query.optVal} ORDER BY id ASC'`
         }
         if ( err ) throw err
         client.query(rq, (err, result)=>{
@@ -434,16 +434,23 @@ app.get('/basket', async (req,res)=>{
 //         })
 //
 // })
-app.post('/basket', (req,res)=>{
+app.post('/basket', async (req,res)=>{
         pool.connect((err, client, done)=>{
             if(err) return console.error(err)
 
-            client.query(`INSERT INTO orders (itemId, count) values 
+            client.query(`                 
+                 UPDATE items
+                SET count = count-$2    
+                WHERE id=$1;
+                `,[req.body.getIdInput, req.body.getCountInput] )
+            client.query(`
+               
+                INSERT INTO orders (itemId, count) values
                 ( (SELECT id FROM items WHERE id=$1), $2)
                  on conflict (itemId) DO
-                 UPDATE SET 
+                 UPDATE SET
                  count = orders.count + $2
-                 returning *`,//todo
+                 returning *;`,
                 [req.body.getIdInput, req.body.getCountInput])
             done()
             res.redirect("/basket")
