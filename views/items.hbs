@@ -4,7 +4,7 @@
             {{cat}}
             <form method="get" action="/items" class="d-flex flex-row">
                 <select class="form-select" aria-label="Default select example" name="optVal">
-                    <option>All items</option>
+                    <option>Allitems</option>
                     <option value="phone">Phones</option>
                     <option value="notebook">Notebooks</option>
                     <option value="pc">Computers</option>
@@ -20,9 +20,10 @@
                         <a href={{link}}>{{name}}</a>
                         <br>
                         <a href={{link}}><img src={{image}} alt=""></a>
-                        <form action="/basket" method="post">
+                        <form action="/basket" method="post" class="">
                             {{#if this.count}}
                                 <input type="hidden" name="getIdInput" value={{id}}>
+                                <input type="number" value="1" name="getCountInput" min="1" max="99">
                                 <input class="btn btn-success m-2" type="submit" value="Купить">
                             {{else}}
                                 <button class="btn btn-secondary m-2" disabled>Товар закончился</button>

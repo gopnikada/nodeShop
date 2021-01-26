@@ -329,7 +329,7 @@ app.get('/items', async (req,res)=>{
     pool.connect((err, client, done)=>{
         let rq
         console.log(req.query.optVal)
-        if(req.params.optVal!=undefined){
+        if(req.query.optVal == undefined ||req.query.optVal == 'Allitems' ){
             rq = `SELECT * FROM items`
         }else{
             rq = `SELECT * FROM items WHERE cat='${req.query.optVal}'`
@@ -389,29 +389,65 @@ app.get('/items/:id', async (req,res)=>{
         })
     })
 })
-app.get('/basket', (req,res)=>{
-    res.render('basket',
-            {
-                layout:'mainLayout',
-                title: 'Basket',
-                orders: orders,
-                count: 5,
-            })
-})
-app.post('/basket', (req,res)=>{
-    orders.push(new Object(itemsList[req.body.getIdInput-1]))
-    if(req.body.orderToDelete!=null){
-        orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1)
-        orders = orders.filter(value => Object.keys(value).length !== 0)
-    }
-    console.log(orders)
-    res.render('basket',
-        {
-            layout:'mainLayout',
-            title: 'Basket',
-            orders: orders,
-            count: 5
+// app.get('/basket', (req,res)=>{
+//     res.render('basket',
+//             {
+//                 layout:'mainLayout',
+//                 title: 'Basket',
+//                 orders: orders,
+//                 count: 5,
+//             })
+// })
+app.get('/basket', async (req,res)=>{
+    pool.on('error', (err)=>{
+        console.error(err)
+        process.exit(-1)
+    })
+    pool.connect((err, client, done)=>{
+        if ( err ) throw err
+        client.query(`SELECT orders.id, orders.count, items.name, items.image
+        FROM orders
+        JOIN items ON items.id=orders.itemId`, (err, result)=>{
+            done()
+            if (err){
+                console.log(err.stack)
+            }else{
+                console.log(result.rows)
+                res.render('basket', {layout: 'mainLayout', orders: result.rows})
+            }
         })
-
+    })
 })
+// app.post('/basket', (req,res)=>{
+//     orders.push(new Object(itemsList[req.body.getIdInput-1]))
+//     if(req.body.orderToDelete!=null){
+//         orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1)
+//         orders = orders.filter(value => Object.keys(value).length !== 0)
+//     }
+//     console.log(orders)
+//     res.render('basket',
+//         {
+//             layout:'mainLayout',
+//             title: 'Basket',
+//             orders: orders,
+//             count: 5
+//         })
+//
+// })
+app.post('/basket', (req,res)=>{
+        pool.connect((err, client, done)=>{
+            if(err) return console.error(err)
+
+            client.query(`INSERT INTO orders (itemId, count) values 
+                ( (SELECT id FROM items WHERE id=$1), $2)
+                 on conflict (items.id) DO
+                 UPDATE SET 
+                 count = EXCLUDED.count + $2
+                 returning *`,//todo
+                [req.body.getIdInput, req.body.getCountInput])
+            done()
+            res.redirect("/basket")
+        })
+    }
+)
 app.listen(process.env.PORT||3030)
