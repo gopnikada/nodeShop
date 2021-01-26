@@ -405,7 +405,7 @@ app.get('/basket', async (req,res)=>{
     })
     pool.connect((err, client, done)=>{
         if ( err ) throw err
-        client.query(`SELECT orders.id, orders.count, items.name, items.image
+        client.query(`SELECT orders.id, orders.itemId, orders.count, items.name, items.image
         FROM orders
         JOIN items ON items.id=orders.itemId`, (err, result)=>{
             done()
@@ -440,9 +440,9 @@ app.post('/basket', (req,res)=>{
 
             client.query(`INSERT INTO orders (itemId, count) values 
                 ( (SELECT id FROM items WHERE id=$1), $2)
-                 on conflict (items.id) DO
+                 on conflict (itemId) DO
                  UPDATE SET 
-                 count = EXCLUDED.count + $2
+                 count = orders.count + $2
                  returning *`,//todo
                 [req.body.getIdInput, req.body.getCountInput])
             done()
