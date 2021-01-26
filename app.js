@@ -312,7 +312,7 @@ app.get('/', (req,res)=>{
 // app.get('/items', (req,res)=>{
 //     itemsToShow.length==0
 //         ?itemsToShow=itemsList
-//         :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)
+//         :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)//todo
 //     res.render('items',
 //         {
 //             layout:'mainLayout',
@@ -327,28 +327,31 @@ app.get('/items', async (req,res)=>{
         process.exit(-1)
     })
     pool.connect((err, client, done)=>{
+        let rq
+        console.log(req.query.optVal)
+        if(req.params.optVal!=undefined){
+            rq = `SELECT * FROM items`
+        }else{
+            rq = `SELECT * FROM items WHERE cat='${req.query.optVal}'`
+        }
         if ( err ) throw err
-        client.query('SELECT * FROM items', (err, result)=>{
+        client.query(rq, (err, result)=>{
             done()
             if (err){
                 console.log(err.stack)
             }else{
                 console.log('connected')
+                for( o of result.rows){
+                    o.link = '/items/'+o.id
+                }
                 res.render('items', {layout: 'mainLayout', items: result.rows})
             }
         })
     })
 })
 
-// app.post('/search', (req,res)=>{
-//     let regex = new RegExp(`${req.body.searchField}`, 'i')
-//     res.render('search', {
-//         layout:'mainLayout',
-//         title:"Search post",
-//         foundItems:itemsList.filter(o=> o.name.match(regex))})
-// })
+
 app.get('/search', async (req,res)=>{
-    let regex = new RegExp(`${req.query.searchField}`, 'i')
     let qr = `SELECT * FROM items WHERE LOWER(name) LIKE LOWER('%${req.query.searchField}%');`
     pool.on('error', (err)=>{
         console.error(err)
@@ -367,11 +370,23 @@ app.get('/search', async (req,res)=>{
         })
     })
 })
-app.get('/items/:id',(req, res)=>{
-    res.render('item', {
-        layout:'mainLayout',
-        title: itemsList[req.params.id-1].name,
-        item: itemsList[req.params.id-1]
+
+app.get('/items/:id', async (req,res)=>{
+    pool.on('error', (err)=>{
+        console.error(err)
+        process.exit(-1)
+    })
+    pool.connect((err, client, done)=>{
+        let qr = `SELECT * FROM items WHERE id=${req.params.id}`
+        if ( err ) throw err
+        client.query(qr, (err, result)=>{
+            done()
+            if (err){
+                console.log(err.stack)
+            }else{
+               res.render('item', {layout: 'mainLayout', item: result.rows[0]})
+            }
+        })
     })
 })
 app.get('/basket', (req,res)=>{
