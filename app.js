@@ -332,7 +332,8 @@ app.get('/items', async (req,res)=>{
         if(req.query.optVal == undefined ||req.query.optVal == 'Allitems' ){
             rq = `SELECT * FROM items ORDER BY id ASC`
         }else{
-            rq = `SELECT * FROM items WHERE cat='${req.query.optVal} ORDER BY id ASC'`
+            console.log('category: '+req.query.optVal)
+            rq = `SELECT * FROM items WHERE cat='${req.query.optVal}' ORDER BY id ASC`
         }
         if ( err ) throw err
         client.query(rq, (err, result)=>{
@@ -457,4 +458,14 @@ app.post('/basket', async (req,res)=>{
         })
     }
 )
+app.post('/basket/:id', (req,res)=>{
+    pool.connect((err, client, done)=>{
+        if(err) return console.error(err)
+
+        client.query('DELETE FROM orders WHERE id=$1 returning *', [req.params.id])
+        console.log('on delete')
+        done()
+        res.redirect('/basket')
+    })
+})
 app.listen(process.env.PORT||3030)
