@@ -461,8 +461,14 @@ app.post('/basket', async (req,res)=>{
 app.post('/basket/:id', (req,res)=>{
     pool.connect((err, client, done)=>{
         if(err) return console.error(err)
+        client.query(`UPDATE items    
+                    SET count = count+(select count from orders where id=${req.params.id})   
+                    WHERE   
+                    id=(select itemid from orders where id=${req.params.id});`)
 
         client.query('DELETE FROM orders WHERE id=$1 returning *', [req.params.id])
+
+
         console.log('on delete')
         done()
         res.redirect('/basket')
