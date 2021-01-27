@@ -17,13 +17,14 @@
             <ul class="d-flex flex-wrap flex-row bg-light" style="list-style-type: none">
                 {{#each items}}
                     <li class="item">
-                        <a href={{link}}>{{name}}</a>
+                        <a href={{link}}><div><h5>{{name}}</h5>
                         <br>
-                        <a href={{link}}><img src={{image}} alt=""></a>
-                        <form action="/basket" method="post" class="">
+                        <img src={{image}} alt=""></div></a>
+                        <form action="/basket" method="post" class="d-flex flex-row justify-content-between">
                             {{#if this.count}}
                                 <input type="hidden" name="getIdInput" value={{id}}>
-                                <input type="number" value="1" name="getCountInput" min="1" max="99">
+                                <h1>{{cost}}$</h1>
+                                <input class="m-3 getCountInput" onchange="changeOrdered(this)" type="number" value="1" name="getCountInput" min="1" max="99">
                                 <input class="btn btn-success m-2" type="submit" value="Купить">
                             {{else}}
                                 <button class="btn btn-secondary m-2" disabled>Товар закончился</button>
@@ -35,3 +36,26 @@
         </div>
     </div>
 </div>
+<script>
+    let val
+    let act
+    function changeOrdered(some){
+
+        let txt = some.parentElement.childNodes[3].textContent
+        const cost = parseFloat(txt)
+        const mock = JSON.stringify(JSON.parse(cost))
+        if(val==undefined){
+            val=mock
+            some.parentElement.childNodes[3].textContent = +val + +val
+            act = parseFloat(some.parentElement.childNodes[3].textContent)
+        }else{
+            some.parentElement.childNodes[3].textContent = +act + +val
+            act = parseFloat(some.parentElement.childNodes[3].textContent)
+        }//todo other items to buy
+
+
+
+        console.log(mock)
+
+    }
+</script>
