@@ -2,10 +2,13 @@ const express = require('express')
 const exhbs = require('express-handlebars')
 const path = require('path')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const app = express()
 const pg = require('pg')
 const { Pool } = require('pg')
+const jwt = require('jsonwebtoken')
 
+let loggedIn = null
 app.set('view engine', 'hbs')
 
 app.engine('hbs', exhbs({
@@ -14,6 +17,8 @@ app.engine('hbs', exhbs({
     layoutsDir: __dirname+'/views/layouts'
 }))
 app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(cookieParser())
 
 const pool = new Pool({
     user: 'postgres',
@@ -23,283 +28,11 @@ const pool = new Pool({
     port: 5432,
 })
 
-// const  itemsList = [
-//     {
-//         id:1,
-//         name:'iPhone',
-//         count:0,
-//         image:'/img/iphone.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:2,
-//         name:'Samsung',
-//         count:5,
-//         image:'/img/samsung.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:3,
-//         name:'Htc',
-//         count:10,
-//         image:'/img/htc.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:4,
-//         name:'iPhone2',
-//         count:15,
-//         image:'/img/iphone2.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:5,
-//         name:'Samsung2',
-//         count:20,
-//         image:'/img/samsung2.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:6,
-//         name:'Htc2',
-//         count:17,
-//         image:'/img/htc2.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:7,
-//         name:'Nokia',
-//         count:15,
-//         image:'/img/nokia.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:8,
-//         name:'Blackberry',
-//         count:0,
-//         image:'/img/bb.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:9,
-//         name:'Sony ericson',
-//         count:17,
-//         image:'/img/se.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'phone',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:10,
-//         name:'Lenovo A1',
-//         count:0,
-//         image:'/img/lenovo.png',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'notebook',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:11,
-//         name:'Acer B5',
-//         count:5,
-//         image:'/img/acer.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'notebook',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:12,
-//         name:'PowerPc XL',
-//         count:10,
-//         image:'/img/pc.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'pc',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:13,
-//         name:'MacPro',
-//         count:15,
-//         image:'/img/macpro.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'pc',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:14,
-//         name:'Sony walkman b12',
-//         count:20,
-//         image:'/img/walkman.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'mp3',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:15,
-//         name:'Apple iPod3',
-//         count:17,
-//         image:'/img/ipod.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'mp3',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:16,
-//         name:'Intel Pentium1',
-//         count:15,
-//         image:'/img/pentium.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'cpu',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:17,
-//         name:'AMD Athlon',
-//         count:0,
-//         image:'/img/athlon.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'cpu',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-//     {
-//         id:18,
-//         name:'Intel xeon',
-//         count:17,
-//         image:'/img/xeon.jpg',
-//         link: function (){
-//             return '/items/' + this.id
-//         },
-//         cat:'cpu',
-//         descr: {
-//             country: "China",
-//             display: "1920x1080 AMOLED",
-//             review: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto blanditiis, enim neque perspiciatis quo repellendus reprehenderit. Aperiam esse ex inventore magni nulla odio quos ullam vel vero voluptatibus. Accusamus, aliquid asperiores beatae culpa delectus doloremque earum eius eligendi enim est et excepturi hic impedit ipsum itaque laboriosam nisi nulla, obcaecati possimus, quibusdam quidem saepe sit tempore? Animi delectus dignissimos doloremque earum et facere non placeat praesentium quis, voluptatibus! Aspernatur autem eaque error itaque, maiores rerum. Delectus eos facere illum laudantium minus placeat sint temporibus vel veritatis, voluptatum? Accusantium ad aliquam debitis dignissimos incidunt laborum magni obcaecati quis repudiandae veniam?'
-//         }
-//     },
-// ]
-
-
 let orders = []
 
 let itemsToShow = []
+
+let userName
 
 app.use(express.static(path.join(__dirname, 'src')))
 
@@ -309,19 +42,32 @@ app.use(express.static(path.join(__dirname, 'src')))
 app.get('/', (req,res)=>{
     res.render('index', {layout:'mainLayout'})
 })
-// app.get('/items', (req,res)=>{
-//     itemsToShow.length==0
-//         ?itemsToShow=itemsList
-//         :itemsToShow = itemsList.filter(item=>item.cat==req.query.optVal)//todo
-//     res.render('items',
-//         {
-//             layout:'mainLayout',
-//             title:"Items",
-//             items: itemsToShow,
-//
-//         })
-// })
+
 app.get('/items', async (req,res)=>{
+    // We can obtain the session token from the requests cookies, which come with every request
+    const token = req.cookies.token
+
+    // if the cookie is not set, return an unauthorized error
+    if (!token) {
+        return res.status(401).end()
+    }
+
+    var payload
+    try {
+        payload = jwt.verify(token, jwtKey)
+    } catch (e) {
+        if (e instanceof jwt.JsonWebTokenError) {
+            // if the error thrown is because the JWT is unauthorized, return a 401 error
+            return res.status(401).end()
+        }
+        // otherwise, return a bad request error
+        return res.status(400).end()
+    }
+
+    // Finally, return the welcome message to the user, along with their
+    // username given in the token
+    loggedIn = payload.username
+    //res.send(`Welcome ${payload.username}!`)
     pool.on('error', (err)=>{
         console.error(err)
         process.exit(-1)
@@ -335,6 +81,7 @@ app.get('/items', async (req,res)=>{
             console.log('category: '+req.query.optVal)
             rq = `SELECT * FROM items WHERE cat='${req.query.optVal}' ORDER BY id ASC`
         }
+        console.log(loggedIn.toString())
         if ( err ) throw err
         client.query(rq, (err, result)=>{
             done()
@@ -390,16 +137,9 @@ app.get('/items/:id', async (req,res)=>{
         })
     })
 })
-// app.get('/basket', (req,res)=>{
-//     res.render('basket',
-//             {
-//                 layout:'mainLayout',
-//                 title: 'Basket',
-//                 orders: orders,
-//                 count: 5,
-//             })
-// })
+
 app.get('/basket', async (req,res)=>{
+    console.log(loggedIn)
     pool.on('error', (err)=>{
         console.error(err)
         process.exit(-1)
@@ -414,28 +154,14 @@ app.get('/basket', async (req,res)=>{
                 console.log(err.stack)
             }else{
                 console.log(result.rows)
-                res.render('basket', {layout: 'mainLayout', orders: result.rows})
+                res.render('basket', {layout: 'mainLayout', orders: result.rows, loggedIn: loggedIn})
             }
         })
     })
 })
-// app.post('/basket', (req,res)=>{
-//     orders.push(new Object(itemsList[req.body.getIdInput-1]))
-//     if(req.body.orderToDelete!=null){
-//         orders.splice(orders.indexOf(itemsList[req.body.orderToDelete-1]), 1)
-//         orders = orders.filter(value => Object.keys(value).length !== 0)
-//     }
-//     console.log(orders)
-//     res.render('basket',
-//         {
-//             layout:'mainLayout',
-//             title: 'Basket',
-//             orders: orders,
-//             count: 5
-//         })
-//
-// })
+
 app.post('/basket', async (req,res)=>{
+
         pool.connect((err, client, done)=>{
             if(err) return console.error(err)
 
@@ -444,14 +170,14 @@ app.post('/basket', async (req,res)=>{
                 SET count = count-$2    
                 WHERE id=$1;
                 `,[req.body.getIdInput, req.body.getCountInput] )
-            client.query(`
-               
-                INSERT INTO orders (itemId, count) values
-                ( (SELECT id FROM items WHERE id=$1), $2)
+            client.query(`               
+                 INSERT INTO orders (itemId, count, userName) values
+                ( (SELECT id FROM items WHERE id=$1), $2, '${loggedIn}')
                  on conflict (itemId) DO
                  UPDATE SET
                  count = orders.count + $2
-                 returning *;`,
+                 returning *;
+                 `,
                 [req.body.getIdInput, req.body.getCountInput])
             done()
             res.redirect("/basket")
@@ -474,4 +200,46 @@ app.post('/basket/:id', (req,res)=>{
         res.redirect('/basket')
     })
 })
-app.listen(process.env.PORT||3030)
+const users = {
+    user1: 'password1',
+    user2: 'password2'
+}
+
+const jwtKey = 'my_secret_key'
+const jwtExpirySeconds = 5000
+
+app.post('/signin', (req, res) => {
+    // Get credentials from JSON body
+    const { username, password } = req.body
+    if (!username || !password || users[username] !== password) {
+        // return 401 error is username or password doesn't exist, or if password does
+        // not match the password in our records
+        return res.status(401).end()
+    }
+
+    // Create a new token with the username in the payload
+    // and which expires 300 seconds after issue
+    const token = jwt.sign({ username }, jwtKey, {
+        algorithm: 'HS256',
+        expiresIn: jwtExpirySeconds
+    })
+    console.log('token:', token)
+    userName = username
+    // set the cookie as the token string, with a similar max age as the token
+    // here, the max age is in milliseconds, so we multiply by 1000
+    res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 })
+    res.redirect('/')
+    res.end()
+})
+app.get('/login', (req,res)=>{
+    res.render('login', {layout:'mainLayout'})
+})
+app.post('/logout', (req,res)=>{
+    res.clearCookie('token');
+    res.redirect('/')
+})
+
+app.post('/buy', (req,res)=>{
+
+})
+app.listen(process.env.PORT || 3030)

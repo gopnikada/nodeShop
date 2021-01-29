@@ -20,8 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667000bc-6c47-48a5-a6c8-ae3dfdcfb2a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/newFile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/login.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/handlers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/basket.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/basket.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +59,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -61,7 +69,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\WS4\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -111,7 +119,12 @@
       <workItem from="1611658007885" duration="4416000" />
       <workItem from="1611683044460" duration="15952000" />
       <workItem from="1611733301874" duration="2869000" />
-      <workItem from="1611769953719" duration="4338000" />
+      <workItem from="1611769953719" duration="4642000" />
+      <workItem from="1611839733878" duration="140000" />
+      <workItem from="1611839912417" duration="204000" />
+      <workItem from="1611840135745" duration="684000" />
+      <workItem from="1611840846064" duration="7766000" />
+      <workItem from="1611922815497" duration="8347000" />
     </task>
     <servers />
   </component>
@@ -131,30 +144,38 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1611056486380">
+    <state x="437" y="206" key="#Notifications" timestamp="1611841980627">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1611056486380" />
-    <state width="1344" height="199" key="GridCell.Tab.0.bottom" timestamp="1611778880904">
+    <state x="437" y="206" key="#Notifications/0.0.1366.768@0.0.1366.768" timestamp="1611841980627" />
+    <state x="393" y="1" width="680" height="455" key="#Vim_Emulation" timestamp="1611841797142">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="393" y="1" width="680" height="455" key="#Vim_Emulation/0.0.1366.768@0.0.1366.768" timestamp="1611841797142" />
+    <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1611841107083">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1611841107083" />
+    <state width="1344" height="197" key="GridCell.Tab.0.bottom" timestamp="1611934613692">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611778880904" />
-    <state width="1344" height="199" key="GridCell.Tab.0.center" timestamp="1611778880903">
+    <state width="1344" height="197" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
+    <state width="1344" height="197" key="GridCell.Tab.0.center" timestamp="1611934613692">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611778880903" />
-    <state width="1344" height="199" key="GridCell.Tab.0.left" timestamp="1611778880903">
+    <state width="1344" height="197" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
+    <state width="1344" height="197" key="GridCell.Tab.0.left" timestamp="1611934613692">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611232413692" />
-    <state width="1344" height="199" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611778880903" />
-    <state width="1344" height="199" key="GridCell.Tab.0.right" timestamp="1611778880903">
+    <state width="1344" height="197" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
+    <state width="1344" height="197" key="GridCell.Tab.0.right" timestamp="1611934613692">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="199" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611778880903" />
+    <state width="1344" height="197" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
     <state width="1344" height="233" key="GridCell.Tab.1.bottom" timestamp="1611515107932">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -203,11 +224,15 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="233" key="GridCell.Tab.3.right/0.0.1366.768@0.0.1366.768" timestamp="1611515107933" />
-    <state x="184" y="0" key="SettingsEditor" timestamp="1611305317882">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="132" y="29" key="SettingsEditor" timestamp="1611840826339">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1611305317882" />
-    <state x="184" y="14" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1611226652521" />
+    <state x="132" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1611840826339" />
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1611932330931">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1611932330931" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1611659190375">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
