@@ -20,12 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667000bc-6c47-48a5-a6c8-ae3dfdcfb2a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/newFile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/login.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/buy.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/JWT/jwt-nodejs-example/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -48,6 +44,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="ProjectId" id="1nHekY6GbOMyIsxL5ipDH0aQlKE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -124,7 +121,7 @@
       <workItem from="1611839912417" duration="204000" />
       <workItem from="1611840135745" duration="684000" />
       <workItem from="1611840846064" duration="7766000" />
-      <workItem from="1611922815497" duration="8347000" />
+      <workItem from="1611922815497" duration="16075000" />
     </task>
     <servers />
   </component>
@@ -156,26 +153,26 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="460" y="184" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1611841107083" />
-    <state width="1344" height="197" key="GridCell.Tab.0.bottom" timestamp="1611934613692">
+    <state width="1344" height="225" key="GridCell.Tab.0.bottom" timestamp="1611956045541">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="197" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
-    <state width="1344" height="197" key="GridCell.Tab.0.center" timestamp="1611934613692">
+    <state width="1344" height="225" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1611956045541" />
+    <state width="1344" height="225" key="GridCell.Tab.0.center" timestamp="1611956045541">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="197" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
-    <state width="1344" height="197" key="GridCell.Tab.0.left" timestamp="1611934613692">
+    <state width="1344" height="225" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1611956045541" />
+    <state width="1344" height="225" key="GridCell.Tab.0.left" timestamp="1611956045541">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611232413692" />
-    <state width="1344" height="197" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
-    <state width="1344" height="197" key="GridCell.Tab.0.right" timestamp="1611934613692">
+    <state width="1344" height="225" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1611956045541" />
+    <state width="1344" height="225" key="GridCell.Tab.0.right" timestamp="1611956045541">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1344" height="187" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611232413693" />
-    <state width="1344" height="197" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611934613692" />
+    <state width="1344" height="225" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1611956045541" />
     <state width="1344" height="233" key="GridCell.Tab.1.bottom" timestamp="1611515107932">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -233,6 +230,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1611932330931" />
+    <state x="339" y="167" key="run.anything.popup" timestamp="1611956237343">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="339" y="167" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1611956237343" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1611659190375">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
