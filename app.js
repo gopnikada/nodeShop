@@ -9,6 +9,7 @@ const { Pool } = require('pg')
 const jwt = require('jsonwebtoken')
 var LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch')
+var store = require('store')
 
 let loggedIn = null
 app.set('view engine', 'hbs')
@@ -19,6 +20,7 @@ app.engine('hbs', exhbs({
     layoutsDir: __dirname+'/views/layouts'
 }))
 app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
@@ -116,40 +118,49 @@ app.get('/items/:id', async (req,res)=>{
         })
     })
 })
-
+let orderIdsArr = []
 app.get('/basket', async (req,res)=>{
     // console.log(loggedIn)
-    // pool.on('error', (err)=>{
-    //     console.error(err)
-    //     process.exit(-1)
-    // })
-    // pool.connect((err, client, done)=>{
-    //     if ( err ) throw err
-    //     client.query(`SELECT orders.id, orders.itemId, orders.count, items.name, items.image
-    //     FROM orders
-    //     JOIN items ON items.id=orders.itemId`, (err, result)=>{
-    //         done()
-    //         if (err){
-    //             console.log(err.stack)
-    //         }else{
-    //             console.log(result.rows)
-    //             res.render('basket', {layout: 'mainLayout', orders: result.rows, loggedIn: loggedIn})
-    //         }
-    //     })
-    // })
+
+    store.each(function(value, key) {
+        orderIdsArr.push(parseInt(value.itemId))
+    })
+    console.log(orderIdsArr.map(n=> `${n}`))
+    pool.on('error', (err)=>{
+        console.error(err)
+        process.exit(-1)
+    })
+    pool.connect((err, client, done)=>{
+        if ( err ) throw err
+        client.query(`SELECT * FROM items
+        
+         ORDER BY id ASC`, (err, result)=>{
+            done()
+            if (err){
+                console.log(err.stack)
+            }else{
+                //console.log(result.rows)
+                res.render('basket', {layout: 'mainLayout', orders: result.rows, loggedIn: loggedIn})
+            }
+        })
+    })
     // let allOrders = []
     // console.log('ls' + localStorage.getItem(`order1`))
     // console.log('ls' + localStorage.getItem(`order2`))
     // console.log('ls' + localStorage.getItem(`order3`))
 
-    var arrayOfValues = Object.values(localStorage);
+//     var arrayOfValues = Object.values(localStorage);
+// console.log(arrayOfValues)
+//     console.log(JSON.parse(JSON.stringify(arrayOfValues[8])))
+//
 
+    //console.log(`order${n}`, store.get(`order${n}`))
 
-    res.render('basket', {
-        layout: 'mainLayout',
-        orders: arrayOfValues[8],
-        loggedIn: loggedIn
-    })
+    // res.render('basket', {
+    //     layout: 'mainLayout',
+    //     //orders: arrayOfValues[8],
+    //     loggedIn: loggedIn
+    // })
 
 })
 let n=0
@@ -177,12 +188,18 @@ app.post('/basket', async (req,res)=>{
         //     res.redirect("/basket")
         // })
         n++
-    localStorage.setItem(`order${n}`, JSON.stringify({
+    // localStorage.setItem(`order${n}`, JSON.stringify({
+    //     'itemId': req.body.getIdInput,
+    //     'count': req.body.getCountInput
+    // }))
+    //
+    // console.log(`order${n}: ` +  (localStorage.getItem(`order${n}`)))
+    store.set(`order${n}`, {
         'itemId': req.body.getIdInput,
         'count': req.body.getCountInput
-    }))
-
-    console.log(`order${n}: ` +  (localStorage.getItem(`order${n}`)))
+    })
+        //console.log(`order${n}`, store.get(`order${n}`))
+    //todo: check count
 
     res.redirect('/basket')
 
